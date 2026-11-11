@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   message: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
   },
 });

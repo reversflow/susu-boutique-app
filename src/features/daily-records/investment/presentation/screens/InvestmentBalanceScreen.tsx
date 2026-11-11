@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   heading: {
-    fontSize: 20,
+    fontSize: 22,
   },
   typeFilters: {
     gap: 8,
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   filterLabel: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '600',
   },
   monthFilter: {
@@ -321,12 +321,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   monthFilterLabel: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
     textTransform: 'capitalize',
   },
   monthFilterChevron: {
-    fontSize: 18,
+    fontSize: 20,
   },
   retryButton: {
     minHeight: 44,
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   retryLabel: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '600',
   },
   state: {
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   stateText: {
-    fontSize: 13,
+    fontSize: 14,
     textAlign: 'center',
   },
   listFooter: {
@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   loadMoreLabel: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '700',
   },
   modalBackdrop: {
@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   monthPickerTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '700',
   },
   monthStepper: {
@@ -391,12 +391,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   monthStepText: {
-    fontSize: 30,
+    fontSize: 32,
     fontWeight: '600',
   },
   monthDraftLabel: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '600',
     textAlign: 'center',
     textTransform: 'capitalize',
@@ -409,7 +409,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   monthPickerActionText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
   },
 });

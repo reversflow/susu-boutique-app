@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "project": {
+    "name": "appjorge",
+    "productType": "Local-first boutique point of sale and stock",
+    "stack": [
+      "Expo 54",
+      "React 19.1",
+      "React Native 0.81.5",
+      "React Native Web",
+      "TypeScript 5.9"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "src/ui/theme.ts"
+    ],
+    "components": [
+      "src/ui/components",
+      "src/features/store/presentation/components"
+    ],
+    "assets": [
+      "assets"
+    ],
+    "instructions": []
+  },
+  "design": {
+    "colorMode": "light and dark",
+    "colors": {},
+    "typography": {},
+    "spacing": {},
+    "radius": {},
+    "shadows": {},
+    "motion": {},
+    "density": "compact"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [
+      "PrimaryButton",
+      "Screen",
+      "StoreCard",
+      "QuantityStepper",
+      "StoreMessage",
+      "React Native TextInput"
+    ],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [
+      "Use the selected Studio-inspired theme and native components",
+      "Show base and charged unit prices separately",
+      "Review cart total before recording a sale",
+      "Keep mobile and keyboard accessibility",
+      "Record purchase cost on stock intake; preserve unknown historical costs as unknown",
+      "Distinguish expected stock margin from realized gross profit or loss based on charged prices"
+    ],
+    "avoid": [
+      "DOM-only or Tailwind components in React Native",
+      "External component dependencies for this change",
+      "Hosted generation or project uploads"
+    ]
+  },
+  "decisions": [
+    {
+      "date": "2026-11-10",
+      "decision": "Extend the existing warm native sales UI with per-line base/agreed prices, a review cart, purchase cost and honest gross profit or loss. Reuse project primitives."
+    },
+    {
+      "date": "2026-11-10",
+      "decision": "User selected Studio: Susu's Boutique branding, restrained green and neutral palette, boutique editorial headings, Shopify-inspired management layout; existing Tienda, Vender and Logística navigation at bottom on mobile and top on desktop."
+    },
+    {
+      "date": "2026-11-10",
+      "decision": "Store dashboard uses four factual KPIs, investment and stock progress, collapsible forecasts, and a temporary expense input. Mobile is one column; desktop uses a wide management layout. Unknown costs remain pending and no trends are invented."
+    }
+  ],
+  "evidence": [
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    },
+    {
+      "fact": "Native theme and reusable controls inspected",
+      "source": "src/ui/theme.ts; src/features/store/presentation/components/StoreComponents.tsx"
+    }
+  ],
+  "generatedAt": "2026-11-10T11:19:38.259Z"
+}

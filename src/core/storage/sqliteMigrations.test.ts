@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { runMigrations } from './sqliteMigrations';
+import { CURRENT_SCHEMA_VERSION, runMigrations } from './sqliteMigrations';
 
 class FakeDb {
   private version: number;
@@ -77,7 +77,7 @@ describe('runMigrations', () => {
   });
 
   it('skips migrations when user_version is up to date', async () => {
-    const db = new FakeDb(11);
+    const db = new FakeDb(CURRENT_SCHEMA_VERSION);
 
     await runMigrations(db);
 
@@ -215,5 +215,18 @@ describe('runMigrations', () => {
 
     expect(db.executedSql).toContain('PRAGMA user_version = 11;');
     expect(db.executedSql.some((sql) => sql.includes('ADD COLUMN photo_data_url TEXT'))).toBe(true);
+  });
+
+  it('v14 restores the four default jewel types', async () => {
+    const db = new FakeDb(13);
+
+    await runMigrations(db);
+
+    expect(db.executedSql).toContain('PRAGMA user_version = 14;');
+    const migrationSql = db.executedSql.find((sql) => sql.includes('INSERT OR IGNORE INTO store_categories'));
+    expect(migrationSql).toContain("('Anillos', 0)");
+    expect(migrationSql).toContain("('Collares', 1)");
+    expect(migrationSql).toContain("('Pulseras', 2)");
+    expect(migrationSql).toContain("('Pendientes', 3)");
   });
 });

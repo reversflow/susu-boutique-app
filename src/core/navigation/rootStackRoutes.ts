@@ -25,4 +25,11 @@ export const rootStackRoutes: RootStackRouteConfig[] = [
       title: 'Editar proveedor',
     },
   },
+  {
+    name: 'logistics/history',
+    options: {
+      headerShown: true,
+      title: 'Historial de movimientos',
+    },
+  },
 ];

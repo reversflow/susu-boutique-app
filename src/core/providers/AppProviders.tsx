@@ -159,15 +159,15 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   loading: {
-    fontSize: 14,
+    fontSize: 15,
   },
   errorTitle: {
     fontWeight: '700',
-    fontSize: 18,
+    fontSize: 20,
   },
   errorDescription: {
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: 15,
   },
   button: {
     backgroundColor: '#5B3A29',

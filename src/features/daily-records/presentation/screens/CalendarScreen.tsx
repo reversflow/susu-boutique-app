@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   pageTitle: {
-    fontSize: 24,
+    fontSize: 26,
     flexShrink: 1,
   },
   error: {
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   dayActionsLabel: {
-    fontSize: 12,
+    fontSize: 13,
   },
   dayActionsRow: {
     flexDirection: "row",
@@ -296,12 +296,12 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   dayActionText: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: "600",
     textAlign: "center",
   },
   modalBackdrop: { flex: 1, justifyContent: "center", padding: 24, backgroundColor: "rgba(0,0,0,0.45)" },
   actionMenu: { borderWidth: 1, padding: 18, gap: 8 },
-  actionMenuTitle: { fontSize: 16, fontWeight: "700", textAlign: "center", marginBottom: 4 },
+  actionMenuTitle: { fontSize: 17, fontWeight: "700", textAlign: "center", marginBottom: 4 },
   menuAction: { minHeight: 48, alignItems: "center", justifyContent: "center", padding: 8 },
 });

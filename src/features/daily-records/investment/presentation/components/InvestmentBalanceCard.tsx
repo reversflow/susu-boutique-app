@@ -310,11 +310,11 @@ const styles = StyleSheet.create({
     gap: 0,
   },
   availableLabel: {
-    fontSize: 13,
+    fontSize: 14,
   },
   value: {
-    fontSize: 34,
-    lineHeight: 42,
+    fontSize: 36,
+    lineHeight: 45,
   },
   breakdown: {
     marginTop: 4,
@@ -334,14 +334,14 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: '700',
-    fontSize: 13,
+    fontSize: 14,
     textAlign: 'center',
   },
   buttonPressed: {
     opacity: 0.65,
   },
   error: {
-    fontSize: 13,
+    fontSize: 14,
     flex: 1,
   },
   errorRow: {
@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   retryText: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '600',
   },
   modalOverlay: {
@@ -372,18 +372,18 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '700',
   },
   modalHint: {
-    fontSize: 13,
+    fontSize: 14,
     textTransform: 'capitalize',
   },
   input: {
     borderWidth: 1,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    fontSize: 16,
+    fontSize: 17,
   },
   modalActions: {
     flexDirection: 'row',
@@ -400,10 +400,10 @@ const styles = StyleSheet.create({
   },
   modalButtonText: {
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 15,
   },
   modalButtonTextPrimary: {
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 15,
   },
 });

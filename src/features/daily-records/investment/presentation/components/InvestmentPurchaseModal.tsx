@@ -340,20 +340,20 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '700',
   },
   dateValue: {
     minHeight: 40,
     paddingVertical: 10,
-    fontSize: 14,
+    fontSize: 15,
     textTransform: 'capitalize',
   },
   field: {
     gap: 6,
   },
   fieldLabel: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
   },
   pickerButton: {
@@ -365,10 +365,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   pickerText: {
-    fontSize: 15,
+    fontSize: 16,
   },
   pickerCaret: {
-    fontSize: 18,
+    fontSize: 20,
   },
   pickerList: {
     borderWidth: 1,
@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
   },
   pickerEmpty: {
     padding: 12,
-    fontSize: 13,
+    fontSize: 14,
   },
   pickerOption: {
     paddingVertical: 12,
@@ -386,17 +386,17 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   pickerOptionText: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '600',
   },
   input: {
     borderWidth: 1,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    fontSize: 16,
+    fontSize: 17,
   },
   error: {
-    fontSize: 13,
+    fontSize: 14,
   },
   modalActions: {
     flexDirection: 'row',
@@ -416,11 +416,11 @@ const styles = StyleSheet.create({
   },
   modalButtonText: {
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 15,
   },
   modalButtonTextPrimary: {
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 15,
   },
   button: {
     flex: 1,
@@ -431,7 +431,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: '700',
-    fontSize: 13,
+    fontSize: 14,
     textAlign: 'center',
   },
 });

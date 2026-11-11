@@ -103,10 +103,10 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   title: {
-    fontSize: 30,
+    fontSize: 32,
   },
   subtitle: {
-    fontSize: 13,
+    fontSize: 14,
   },
   row: {
     minHeight: 56,
@@ -122,17 +122,17 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   name: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '600',
   },
   details: {
-    fontSize: 13,
+    fontSize: 14,
   },
   created: {
-    fontSize: 11,
+    fontSize: 12,
   },
   chevron: {
-    fontSize: 22,
+    fontSize: 24,
   },
   pressed: {
     opacity: 0.68,
@@ -144,10 +144,10 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   stateText: {
-    fontSize: 13,
+    fontSize: 14,
   },
   error: {
-    fontSize: 13,
+    fontSize: 14,
     textAlign: 'center',
   },
   retry: {
@@ -156,12 +156,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   retryText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
   },
   empty: {
     paddingVertical: 24,
-    fontSize: 14,
+    fontSize: 15,
     textAlign: 'center',
   },
 });

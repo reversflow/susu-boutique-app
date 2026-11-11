@@ -39,17 +39,17 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   label: {
-    fontSize: 12,
-    lineHeight: 17,
+    fontSize: 13,
+    lineHeight: 18,
   },
   value: {
-    fontSize: 20,
-    lineHeight: 26,
+    fontSize: 22,
+    lineHeight: 28,
     fontWeight: '700',
     fontVariant: ['tabular-nums'],
     flexShrink: 1,
   },
   hint: {
-    fontSize: 11,
+    fontSize: 12,
   },
 });

@@ -57,13 +57,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   title: {
-    fontSize: 20,
-    lineHeight: 28,
+    fontSize: 22,
+    lineHeight: 30,
   },
   date: {
     marginTop: 2,
     marginBottom: 4,
-    fontSize: 13,
+    fontSize: 14,
     textTransform: 'capitalize',
   },
   rows: {
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
   },
   state: {
     paddingVertical: 10,
-    fontSize: 14,
+    fontSize: 15,
   },
 });

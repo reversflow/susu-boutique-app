@@ -195,18 +195,18 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   brand: {
-    fontSize: 32,
+    fontSize: 34,
     textAlign: 'center',
     marginBottom: 8,
   },
   heading: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '600',
     textAlign: 'center',
   },
   description: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 15,
+    lineHeight: 22,
     textAlign: 'center',
     marginBottom: 6,
   },
@@ -215,15 +215,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 14,
-    fontSize: 16,
+    fontSize: 17,
   },
   error: {
-    fontSize: 13,
+    fontSize: 14,
   },
   link: {
     paddingVertical: 10,
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
   },
 });

@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   monthLabel: {
-    fontSize: 22,
+    fontSize: 24,
     textTransform: "capitalize",
   },
   totalsRow: {
@@ -169,10 +169,10 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   totalLabel: {
-    fontSize: 12,
+    fontSize: 13,
   },
   totalValue: {
-    fontSize: 26,
+    fontSize: 28,
   },
   list: {
     marginTop: 14,
@@ -192,16 +192,16 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   dayNumber: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "700",
     minWidth: 24,
   },
   weekday: {
-    fontSize: 13,
+    fontSize: 14,
     textTransform: "capitalize",
   },
   amount: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "700",
   },
   center: {

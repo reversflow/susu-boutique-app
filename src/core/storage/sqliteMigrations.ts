@@ -13,7 +13,7 @@ type Migration = {
   up: (db: MigratableDatabase) => Promise<void>;
 };
 
-export const CURRENT_SCHEMA_VERSION = 11;
+export const CURRENT_SCHEMA_VERSION = 14;
 
 const schemaMigrations: Migration[] = [
   {
@@ -238,6 +238,61 @@ const schemaMigrations: Migration[] = [
       await db.execAsync(`
         ALTER TABLE store_price_groups
         ADD COLUMN photo_data_url TEXT NOT NULL DEFAULT '';
+      `);
+    },
+  },
+  {
+    version: 12,
+    name: 'preserve-base-prices-and-sale-request',
+    up: async (db) => {
+      await db.execAsync(`
+        ALTER TABLE store_sale_items ADD COLUMN base_unit_price_cents INTEGER NOT NULL DEFAULT 1 CHECK (base_unit_price_cents > 0);
+        UPDATE store_sale_items SET base_unit_price_cents = unit_price_cents;
+        ALTER TABLE store_sales ADD COLUMN request_id TEXT;
+        ALTER TABLE store_sales ADD COLUMN request_payload TEXT;
+        CREATE UNIQUE INDEX idx_store_sales_request_id ON store_sales(request_id) WHERE request_id IS NOT NULL;
+      `);
+    },
+  },
+  {
+    version: 13,
+    name: 'track-purchase-lots-and-sale-costs',
+    up: async (db) => {
+      await db.execAsync(`
+        CREATE TABLE store_stock_lots (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          price_group_id INTEGER NOT NULL REFERENCES store_price_groups(id) ON DELETE RESTRICT,
+          received_units INTEGER NOT NULL CHECK (received_units > 0),
+          remaining_units INTEGER NOT NULL CHECK (remaining_units >= 0 AND remaining_units <= received_units),
+          unit_cost_cents INTEGER CHECK (unit_cost_cents IS NULL OR unit_cost_cents >= 0),
+          created_at TEXT NOT NULL
+        );
+        CREATE INDEX idx_store_stock_lots_fifo ON store_stock_lots(price_group_id, id);
+        INSERT INTO store_stock_lots (price_group_id, received_units, remaining_units, unit_cost_cents, created_at)
+          SELECT id, stock_units, stock_units, NULL, datetime('now') FROM store_price_groups WHERE stock_units > 0;
+        ALTER TABLE store_sale_items ADD COLUMN cost_total_cents INTEGER CHECK (cost_total_cents IS NULL OR cost_total_cents >= 0);
+        ALTER TABLE store_stock_movements ADD COLUMN cost_total_cents INTEGER CHECK (cost_total_cents IS NULL OR cost_total_cents >= 0);
+        ALTER TABLE store_stock_movements ADD COLUMN charged_total_cents INTEGER CHECK (charged_total_cents IS NULL OR charged_total_cents >= 0);
+        UPDATE store_stock_movements SET charged_total_cents = (
+          SELECT SUM(item.total_cents) FROM store_sale_items AS item
+          WHERE item.sale_id = store_stock_movements.sale_id AND item.price_group_id = store_stock_movements.price_group_id
+        ) WHERE movement_type = 'venta';
+      `);
+    },
+  },
+  {
+    version: 14,
+    name: 'ensure-default-store-categories',
+    up: async (db) => {
+      await db.execAsync(`
+        INSERT OR IGNORE INTO store_categories (name, sort_order) VALUES
+          ('Anillos', 0),
+          ('Collares', 1),
+          ('Pulseras', 2),
+          ('Pendientes', 3);
+
+        UPDATE store_categories SET is_active = 1
+          WHERE name IN ('Anillos', 'Collares', 'Pulseras', 'Pendientes');
       `);
     },
   },

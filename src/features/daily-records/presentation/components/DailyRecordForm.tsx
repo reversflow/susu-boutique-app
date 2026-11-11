@@ -205,32 +205,32 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   date: {
-    fontSize: 22,
-    lineHeight: 30,
+    fontSize: 24,
+    lineHeight: 32,
     textTransform: 'capitalize',
   },
   field: {
     gap: 6,
   },
   fieldLabel: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
   },
   fieldHint: {
-    fontSize: 12,
-    lineHeight: 18,
+    fontSize: 13,
+    lineHeight: 19,
   },
   input: {
     minHeight: 48,
     borderWidth: 1,
     paddingVertical: 10,
-    fontSize: 16,
+    fontSize: 17,
   },
   computedValue: {
     minHeight: 48,
     borderWidth: 1,
     paddingVertical: 12,
-    fontSize: 16,
+    fontSize: 17,
   },
   notes: {
     minHeight: 88,
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 20,
   },
   saveArea: {
     position: 'relative',
@@ -255,6 +255,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   error: {
-    fontSize: 14,
+    fontSize: 15,
   },
 });

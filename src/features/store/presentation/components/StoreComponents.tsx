@@ -1,12 +1,30 @@
 import { PropsWithChildren } from 'react';
 import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { useTheme } from '../../../../core/theme/ThemeProvider';
+import { StoreStockItem } from '../../domain/types';
 
 export function formatEuros(cents: number): string {
   return new Intl.NumberFormat('es-ES', {
     style: 'currency',
     currency: 'EUR',
   }).format(cents / 100);
+}
+
+export function grossProfitLabel(cents: number | null | undefined): string {
+  return cents == null ? 'Beneficio bruto pendiente · falta coste de compra'
+    : `${cents < 0 ? 'Pérdida bruta' : 'Beneficio bruto'} · ${formatEuros(Math.abs(cents))}`;
+}
+
+export function InventoryCostDetails({ item }: { item: StoreStockItem }) {
+  const { theme } = useTheme();
+  if (item.stockUnits === 0) return <Text style={{ color: theme.colors.mutedText }}>Sin unidades para valorar</Text>;
+  if (item.inventoryCostCents == null) return <Text style={{ color: theme.colors.mutedText }}>Coste y margen pendientes · hay unidades sin coste de compra</Text>;
+  const predicted = item.priceCents * item.stockUnits - item.inventoryCostCents;
+  return <View style={{ gap: 4 }}>
+    <Text style={{ color: theme.colors.mutedText }}>Coste medio restante · {formatEuros(item.inventoryCostCents / item.stockUnits)} / unidad</Text>
+    <Text style={{ color: theme.colors.text }}>Valor de compra del stock · {formatEuros(item.inventoryCostCents)}</Text>
+    <Text style={{ color: predicted < 0 ? theme.colors.danger : theme.colors.text }}>{grossProfitLabel(predicted)} previsto a precio base</Text>
+  </View>;
 }
 
 export function StoreCard({
@@ -24,23 +42,31 @@ export function StoreCard({
   style?: StyleProp<ViewStyle>;
 }>) {
   const { theme } = useTheme();
+  const cardStyle: StyleProp<ViewStyle> = [
+    styles.card,
+    {
+      backgroundColor: selected ? theme.colors.card : theme.colors.surface,
+      borderColor: selected ? theme.colors.primary : theme.colors.border,
+      borderRadius: theme.radius.md,
+    },
+    style,
+  ];
+
+  if (!onPress) {
+    return <View style={cardStyle}>{children}</View>;
+  }
+
   return (
     <Pressable
-      accessibilityRole={onPress ? 'button' : undefined}
+      accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
-      accessibilityState={{ disabled: disabled || !onPress, selected }}
-      disabled={disabled || !onPress}
+      accessibilityState={{ disabled, selected }}
+      disabled={disabled}
       onPress={onPress}
       style={({ pressed }) => [
-        styles.card,
-        {
-          backgroundColor: selected ? theme.colors.card : theme.colors.surface,
-          borderColor: selected ? theme.colors.primary : theme.colors.border,
-          borderRadius: theme.radius.md,
-        },
+        cardStyle,
         pressed ? styles.pressed : null,
         disabled ? styles.disabled : null,
-        style,
       ]}
     >
       {children}
@@ -141,23 +167,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   stepperSymbol: {
-    fontSize: 30,
-    lineHeight: 34,
+    fontSize: 32,
+    lineHeight: 37,
   },
   stepperValue: {
     minWidth: 90,
     alignItems: 'center',
   },
   stepperNumber: {
-    fontSize: 36,
+    fontSize: 38,
     fontWeight: '700',
     fontVariant: ['tabular-nums'],
   },
   stepperLabel: {
-    fontSize: 13,
+    fontSize: 14,
   },
   message: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 15,
+    lineHeight: 22,
   },
 });

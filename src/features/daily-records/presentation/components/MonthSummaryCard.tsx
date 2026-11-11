@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   monthName: {
-    fontSize: 20,
+    fontSize: 22,
     textTransform: 'capitalize',
   },
   headerMonthButton: {
@@ -129,10 +129,10 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   monthChevron: {
-    fontSize: 20,
+    fontSize: 22,
   },
   badge: {
-    fontSize: 12,
+    fontSize: 13,
   },
   pressed: {
     opacity: 0.65,
