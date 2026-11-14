@@ -440,8 +440,8 @@ const styles = StyleSheet.create({
     // backgroundColor: theme.colors.primary,
   },
   monthButtonText: {
-    fontSize: 26,
-    lineHeight: 28,
+    fontSize: 28,
+    lineHeight: 30,
     fontWeight: "700",
   },
   controlPressed: {
@@ -454,14 +454,14 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   yearLabel: {
-    fontSize: 12,
+    fontSize: 13,
     letterSpacing: 4,
     fontWeight: "600",
     textTransform: "uppercase",
   },
   title: {
-    fontSize: 30,
-    lineHeight: 36,
+    fontSize: 32,
+    lineHeight: 39,
     textTransform: "capitalize",
   },
   statusRow: {
@@ -478,7 +478,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   legendLabel: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: "600",
   },
   todayButton: {
@@ -492,7 +492,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   todayButtonText: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: "700",
   },
   todayButtonTextDisabled: {
@@ -517,7 +517,7 @@ const styles = StyleSheet.create({
   weekdayHeader: {
     textAlign: "center",
     fontWeight: "700",
-    fontSize: 12,
+    fontSize: 13,
   },
   grid: {
     flexGrow: 0,
@@ -575,7 +575,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
   },
   dayNumber: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "700",
   },
   currentMonthText: {
@@ -623,7 +623,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   loadingText: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: "600",
   },
 });

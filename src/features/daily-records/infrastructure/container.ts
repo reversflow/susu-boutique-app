@@ -1,11 +1,11 @@
 import { DailyRecordService } from '../application/DailyRecordService';
-import { SQLiteDailyRecordRepository } from './SQLiteDailyRecordRepository';
+import { SupabaseDailyRecordRepository } from './SupabaseDailyRecordRepository';
 import { InvestmentBalanceService } from '../investment/application/InvestmentBalanceService';
-import { SQLiteInvestmentAdjustmentRepository } from '../investment/infrastructure/SQLiteInvestmentAdjustmentRepository';
+import { SupabaseInvestmentAdjustmentRepository } from '../investment/infrastructure/SupabaseInvestmentAdjustmentRepository';
 import { BackupService, createBackupService } from '../../../core/storage/backup';
 
-const repository = new SQLiteDailyRecordRepository();
-const adjustmentRepository = new SQLiteInvestmentAdjustmentRepository();
+const repository = new SupabaseDailyRecordRepository();
+const adjustmentRepository = new SupabaseInvestmentAdjustmentRepository();
 
 export const dailyRecordService = new DailyRecordService(repository);
 export const investmentBalanceService = new InvestmentBalanceService(

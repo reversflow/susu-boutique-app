@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '700',
   },
   grid: {
@@ -75,13 +75,13 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   metricLabel: {
-    fontSize: 12,
+    fontSize: 13,
   },
   metricValue: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '600',
   },
   meta: {
-    fontSize: 12,
+    fontSize: 13,
   },
 });

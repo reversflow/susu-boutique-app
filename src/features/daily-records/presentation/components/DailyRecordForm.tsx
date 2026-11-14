@@ -60,7 +60,7 @@ export function DailyRecordForm(props: Props) {
         <TextInput
           accessibilityLabelledBy="total-sold-label"
           accessibilityLabel="Total vendido en euros"
-          accessibilityHint="Ingresá el total vendido del día"
+          accessibilityHint="Ingresa el total vendido del día"
           keyboardType="decimal-pad"
           value={props.totalSold}
           onChangeText={props.onTotalSoldChange}
@@ -71,11 +71,11 @@ export function DailyRecordForm(props: Props) {
         />
       </Field>
 
-      <Field label="Ventas datafono (€)" labelId="dataphone-sales-label">
+      <Field label="Ventas con tarjeta (€)" labelId="dataphone-sales-label">
         <TextInput
           accessibilityLabelledBy="dataphone-sales-label"
-          accessibilityLabel="Ventas datafono en euros"
-          accessibilityHint="Ingresá cuánto se vendió con el datafono. Solo es un registro informativo, no afecta los cálculos"
+          accessibilityLabel="Ventas con tarjeta en euros"
+          accessibilityHint="Indica cuánto se vendió con tarjeta. Es solo un registro informativo y no afecta a los cálculos."
           keyboardType="decimal-pad"
           value={props.dataphoneSales}
           onChangeText={props.onDataphoneSalesChange}
@@ -117,7 +117,7 @@ export function DailyRecordForm(props: Props) {
         <TextInput
           accessibilityLabelledBy="additional-expenses-label"
           accessibilityLabel="Gastos adicionales en euros"
-          accessibilityHint="Ingresá los gastos adicionales del día"
+          accessibilityHint="Ingresa los gastos adicionales del día"
           keyboardType="decimal-pad"
           value={props.additionalExpenses}
           onChangeText={props.onAdditionalExpensesChange}
@@ -132,7 +132,7 @@ export function DailyRecordForm(props: Props) {
         <TextInput
           accessibilityLabelledBy="notes-label"
           accessibilityLabel="Notas del día"
-          accessibilityHint="Agregá observaciones opcionales del día"
+          accessibilityHint="Agrega observaciones opcionales del día"
           style={[styles.input, styles.notes, inputStyle]}
           multiline
           value={props.notes}
@@ -205,32 +205,32 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   date: {
-    fontSize: 22,
-    lineHeight: 30,
+    fontSize: 24,
+    lineHeight: 32,
     textTransform: 'capitalize',
   },
   field: {
     gap: 6,
   },
   fieldLabel: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
   },
   fieldHint: {
-    fontSize: 12,
-    lineHeight: 18,
+    fontSize: 13,
+    lineHeight: 19,
   },
   input: {
     minHeight: 48,
     borderWidth: 1,
     paddingVertical: 10,
-    fontSize: 16,
+    fontSize: 17,
   },
   computedValue: {
     minHeight: 48,
     borderWidth: 1,
     paddingVertical: 12,
-    fontSize: 16,
+    fontSize: 17,
   },
   notes: {
     minHeight: 88,
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 20,
   },
   saveArea: {
     position: 'relative',
@@ -255,6 +255,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   error: {
-    fontSize: 14,
+    fontSize: 15,
   },
 });

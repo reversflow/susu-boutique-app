@@ -14,6 +14,7 @@ describe("rootStackRoutes", () => {
       '(drawer)',
       'supplier/new',
       'supplier/[id]',
+      'logistics/history',
     ]);
   });
 });

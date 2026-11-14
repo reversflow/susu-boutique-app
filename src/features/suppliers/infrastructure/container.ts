@@ -1,6 +1,6 @@
 import { SupplierService } from '../application/SupplierService';
-import { SQLiteSupplierRepository } from './SQLiteSupplierRepository';
+import { SupabaseSupplierRepository } from './SupabaseSupplierRepository';
 
-const supplierRepository = new SQLiteSupplierRepository();
+const supplierRepository = new SupabaseSupplierRepository();
 
 export const supplierService = new SupplierService(supplierRepository);

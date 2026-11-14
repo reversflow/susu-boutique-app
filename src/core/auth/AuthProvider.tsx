@@ -1,4 +1,12 @@
-import { createContext, PropsWithChildren, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { AppState, Platform } from 'react-native';
 import type { Session } from '@supabase/supabase-js';
 import { getSupabaseClient, isSupabaseConfigured } from '../backend/supabaseClient';
@@ -31,7 +39,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
 
     let mounted = true;
+    let receivedAuthEvent = false;
     let client;
+
     try {
       client = getSupabaseClient();
     } catch {
@@ -43,6 +53,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setIsLoading(true);
     setError(null);
     const { data: authListener } = client.auth.onAuthStateChange((_event, nextSession) => {
+      receivedAuthEvent = true;
       if (mounted) {
         setSession(nextSession);
         setIsLoading(false);
@@ -51,16 +62,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
     });
 
     void client.auth.getSession().then(({ data, error: sessionError }) => {
-      if (!mounted) return;
+      if (!mounted || receivedAuthEvent) return;
       if (sessionError) {
-        setError('No se pudo recuperar la sesión. Revisá la conexión e intentá de nuevo.');
+        setError('No se pudo recuperar la sesión. Revisa la conexión e inténtalo de nuevo.');
       } else {
         setSession(data.session);
       }
       setIsLoading(false);
     }).catch(() => {
-      if (mounted) {
-        setError('No se pudo recuperar la sesión. Revisá la conexión e intentá de nuevo.');
+      if (mounted && !receivedAuthEvent) {
+        setError('No se pudo recuperar la sesión. Revisa la conexión e inténtalo de nuevo.');
         setIsLoading(false);
       }
     });
@@ -74,6 +85,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
             void client.auth.stopAutoRefresh();
           }
         });
+
     if (Platform.OS !== 'web' && AppState.currentState === 'active') {
       void client.auth.startAutoRefresh();
     }
@@ -88,13 +100,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const signIn = useCallback(async (email: string, password: string): Promise<string | null> => {
     try {
-      const { error: signInError } = await getSupabaseClient().auth.signInWithPassword({
-        email,
-        password,
-      });
+      const { error: signInError } = await getSupabaseClient().auth.signInWithPassword({ email, password });
       return signInError?.message ?? null;
     } catch {
-      return 'No se pudo conectar. Revisá tu conexión e intentá de nuevo.';
+      return 'No se pudo conectar. Revisa tu conexión e inténtalo de nuevo.';
     }
   }, []);
 
@@ -103,7 +112,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const { error: signOutError } = await getSupabaseClient().auth.signOut();
       return signOutError?.message ?? null;
     } catch {
-      return 'No se pudo cerrar la sesión. Revisá tu conexión e intentá de nuevo.';
+      return 'No se pudo cerrar la sesión. Revisa tu conexión e inténtalo de nuevo.';
     }
   }, []);
 

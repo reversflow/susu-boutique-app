@@ -36,7 +36,7 @@ afterEach(() => {
 });
 
 describe('validateBackupDatabase', () => {
-  it('accepts migration-source fixtures from v1 through v11', async () => {
+  it('accepts migration-source fixtures through the current schema', async () => {
     for (let version = 1; version <= CURRENT_SCHEMA_VERSION; version += 1) {
       const database = createFixture(version);
       const fixture = adapter(database);
@@ -44,6 +44,28 @@ describe('validateBackupDatabase', () => {
 
       await expect(validateBackupDatabase(fixture)).resolves.toBe(version);
     }
+  });
+
+  it.each([
+    ['store_sale_items', 'base_unit_price_cents'],
+    ['store_sales', 'request_payload'],
+    ['store_sale_items', 'cost_total_cents'],
+    ['store_stock_movements', 'charged_total_cents'],
+    ['store_stock_lots', 'unit_cost_cents'],
+  ])('rejects a current backup missing %s.%s', async (table, column) => {
+    const database = createFixture(CURRENT_SCHEMA_VERSION);
+    const fixture = adapter(database);
+    await runMigrationsThrough(fixture);
+    database.exec(`ALTER TABLE ${table} DROP COLUMN ${column};`);
+    await expect(validateBackupDatabase(fixture)).rejects.toThrow('forma esperada');
+  });
+
+  it('rejects a current backup missing the purchase lots table', async () => {
+    const database = createFixture(CURRENT_SCHEMA_VERSION);
+    const fixture = adapter(database);
+    await runMigrationsThrough(fixture);
+    database.exec('DROP TABLE store_stock_lots;');
+    await expect(validateBackupDatabase(fixture)).rejects.toThrow('tablas requeridas');
   });
 
   it('accepts the known defective v3 shape so v4 can repair it', async () => {

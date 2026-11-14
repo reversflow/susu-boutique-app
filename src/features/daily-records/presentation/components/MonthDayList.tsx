@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '700',
   },
   list: {
@@ -96,12 +96,12 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   dayNumber: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '700',
     minWidth: 24,
   },
   weekday: {
-    fontSize: 13,
+    fontSize: 14,
     textTransform: 'capitalize',
   },
   right: {
@@ -109,10 +109,10 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   amount: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
   },
   hint: {
-    fontSize: 12,
+    fontSize: 13,
   },
 });

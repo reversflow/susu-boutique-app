@@ -61,12 +61,12 @@ export function InvestmentPurchaseModal({ visible, saving, defaultDate, showTitl
 
   const handleSave = async () => {
     if (!selectedSupplierId) {
-      setSubmitError('Seleccioná un proveedor.');
+      setSubmitError('Selecciona un proveedor.');
       return;
     }
     const parsed = Number(amount.replace(',', '.')) || 0;
     if (parsed <= 0) {
-      setSubmitError('El monto debe ser mayor a 0.');
+      setSubmitError('El importe debe ser mayor que cero.');
       return;
     }
 
@@ -140,7 +140,7 @@ export function InvestmentPurchaseModal({ visible, saving, defaultDate, showTitl
                   { color: selectedSupplier ? theme.colors.text : theme.colors.mutedText },
                 ]}
               >
-                {selectedSupplier ? selectedSupplier.name : 'Elegí un proveedor…'}
+                {selectedSupplier ? selectedSupplier.name : 'Elige un proveedor…'}
               </Text>
               <Text style={[styles.pickerCaret, { color: theme.colors.mutedText }]}>⌄</Text>
             </Pressable>
@@ -158,7 +158,7 @@ export function InvestmentPurchaseModal({ visible, saving, defaultDate, showTitl
               >
                 {suppliers.length === 0 ? (
                   <Text style={[styles.pickerEmpty, { color: theme.colors.mutedText }]}>
-                    No hay proveedores. Agregalos desde la agenda.
+                    No hay proveedores. Añádelos desde la agenda.
                   </Text>
                 ) : (
                   suppliers.map((supplier) => {
@@ -199,10 +199,10 @@ export function InvestmentPurchaseModal({ visible, saving, defaultDate, showTitl
           </View>
 
           <View style={styles.field}>
-            <Text style={[styles.fieldLabel, { color: theme.colors.text }]}>Monto (€) *</Text>
+            <Text style={[styles.fieldLabel, { color: theme.colors.text }]}>Importe (€) *</Text>
             <TextInput
-              accessibilityLabel="Monto de la inversión en euros"
-              accessibilityHint="Ingresá cuánto invertiste con este proveedor"
+              accessibilityLabel="Importe de la inversión en euros"
+              accessibilityHint="Indica cuánto invertiste con este proveedor"
               keyboardType="decimal-pad"
               value={amount}
               onChangeText={setAmount}
@@ -340,20 +340,20 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '700',
   },
   dateValue: {
     minHeight: 40,
     paddingVertical: 10,
-    fontSize: 14,
+    fontSize: 15,
     textTransform: 'capitalize',
   },
   field: {
     gap: 6,
   },
   fieldLabel: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
   },
   pickerButton: {
@@ -365,10 +365,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   pickerText: {
-    fontSize: 15,
+    fontSize: 16,
   },
   pickerCaret: {
-    fontSize: 18,
+    fontSize: 20,
   },
   pickerList: {
     borderWidth: 1,
@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
   },
   pickerEmpty: {
     padding: 12,
-    fontSize: 13,
+    fontSize: 14,
   },
   pickerOption: {
     paddingVertical: 12,
@@ -386,17 +386,17 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   pickerOptionText: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '600',
   },
   input: {
     borderWidth: 1,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    fontSize: 16,
+    fontSize: 17,
   },
   error: {
-    fontSize: 13,
+    fontSize: 14,
   },
   modalActions: {
     flexDirection: 'row',
@@ -416,11 +416,11 @@ const styles = StyleSheet.create({
   },
   modalButtonText: {
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 15,
   },
   modalButtonTextPrimary: {
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 15,
   },
   button: {
     flex: 1,
@@ -431,7 +431,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: '700',
-    fontSize: 13,
+    fontSize: 14,
     textAlign: 'center',
   },
 });

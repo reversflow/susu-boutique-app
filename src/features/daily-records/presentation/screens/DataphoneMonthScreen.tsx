@@ -50,7 +50,7 @@ export function DataphoneMonthScreen() {
       <Screen>
         <View style={styles.center}>
           <ActivityIndicator color={theme.colors.primary} />
-          <Text style={[styles.muted, { color: theme.colors.mutedText }]}>Cargando datafono...</Text>
+          <Text style={[styles.muted, { color: theme.colors.mutedText }]}>Cargando ventas con tarjeta...</Text>
         </View>
       </Screen>
     );
@@ -61,7 +61,7 @@ export function DataphoneMonthScreen() {
       <Screen>
         <View style={styles.center}>
           <Text style={[styles.message, { color: theme.colors.danger }]}>
-            No se pudo cargar el detalle de datafono.
+            No se pudo cargar el detalle de las ventas con tarjeta.
           </Text>
           <Pressable
             accessibilityRole="button"
@@ -111,7 +111,7 @@ export function DataphoneMonthScreen() {
       {dataphoneDays.length === 0 ? (
         <View style={styles.center}>
           <Text style={[styles.muted, { color: theme.colors.mutedText }]}>
-            No hubo ventas datafono este mes.
+            No hubo ventas con tarjeta este mes.
           </Text>
         </View>
       ) : (
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   monthLabel: {
-    fontSize: 22,
+    fontSize: 24,
     textTransform: "capitalize",
   },
   totalsRow: {
@@ -169,10 +169,10 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   totalLabel: {
-    fontSize: 12,
+    fontSize: 13,
   },
   totalValue: {
-    fontSize: 26,
+    fontSize: 28,
   },
   list: {
     marginTop: 14,
@@ -192,16 +192,16 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   dayNumber: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "700",
     minWidth: 24,
   },
   weekday: {
-    fontSize: 13,
+    fontSize: 14,
     textTransform: "capitalize",
   },
   amount: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "700",
   },
   center: {

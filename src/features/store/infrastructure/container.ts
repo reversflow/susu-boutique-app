@@ -1,4 +1,4 @@
 import { StoreService } from '../application/StoreService';
-import { SQLiteStoreRepository } from './SQLiteStoreRepository';
+import { SupabaseStoreRepository } from './SupabaseStoreRepository';
 
-export const storeService = new StoreService(new SQLiteStoreRepository());
+export const storeService = new StoreService(new SupabaseStoreRepository());

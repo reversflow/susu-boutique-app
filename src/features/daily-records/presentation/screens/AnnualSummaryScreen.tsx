@@ -152,8 +152,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   yearButtonText: {
-    fontSize: 26,
-    lineHeight: 28,
+    fontSize: 28,
+    lineHeight: 30,
     fontWeight: "700",
   },
   controlPressed: {
@@ -166,10 +166,10 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   title: {
-    fontSize: 28,
+    fontSize: 30,
   },
   yearLabel: {
-    fontSize: 14,
+    fontSize: 15,
   },
   todayButton: {
     minHeight: 44,
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   todayButtonText: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: "700",
   },
   list: {

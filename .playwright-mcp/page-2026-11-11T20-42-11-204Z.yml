@@ -1,0 +1,36 @@
+- generic [ref=e13]:
+  - heading "Susu's Boutique" [level=1] [ref=e15]
+  - generic [ref=e16]:
+    - tablist [ref=e18]:
+      - tab "  Tienda" [ref=e20] [cursor=pointer]:
+        - generic [ref=e21]:
+          - generic [ref=e22]: 
+          - generic [ref=e24]: 
+        - generic [ref=e26]: Tienda
+      - tab "  Vender" [selected] [ref=e28] [cursor=pointer]:
+        - generic [ref=e29]:
+          - generic [ref=e30]: 
+          - generic [ref=e32]: 
+        - generic [ref=e34]: Vender
+      - tab "  Logística" [ref=e36] [cursor=pointer]:
+        - generic [ref=e37]:
+          - generic [ref=e38]: 
+          - generic [ref=e40]: 
+        - generic [ref=e42]: Logística
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]: Venta
+        - generic [ref=e52]: Hoy · 0,00 € · 0 unidades
+        - generic [ref=e53]: Coste de lo vendido hoy · 0,00 €
+        - generic [ref=e54]: Beneficio bruto · 0,00 €
+      - generic [ref=e55]: Agregá las joyas. Podés respetar su precio base o pactar otro por unidad.
+      - generic [ref=e56]:
+        - generic [ref=e57]: Elegí una categoría
+        - button "Elegir Anillos" [ref=e58] [cursor=pointer]:
+          - generic [ref=e59]: Anillos
+        - button "Elegir Collares" [ref=e60] [cursor=pointer]:
+          - generic [ref=e61]: Collares
+        - button "Elegir Pulseras" [ref=e62] [cursor=pointer]:
+          - generic [ref=e63]: Pulseras
+        - button "Elegir Pendientes" [ref=e64] [cursor=pointer]:
+          - generic [ref=e65]: Pendientes

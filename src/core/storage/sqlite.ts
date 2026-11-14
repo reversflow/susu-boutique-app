@@ -1,4 +1,5 @@
 import * as SQLite from 'expo-sqlite';
+import { Platform } from 'react-native';
 import { runMigrations } from './sqliteMigrations';
 import {
   advanceDatabaseGeneration,
@@ -8,7 +9,9 @@ import {
   subscribeDatabaseGeneration,
 } from './databaseCoordinator';
 
-const DB_NAME = 'susu-boutique.db';
+// Keep browser previews isolated from persistent OPFS data while the backend is local.
+const USE_IN_MEMORY_WEB_DATABASE = Platform.OS === 'web' && __DEV__;
+const DB_NAME = USE_IN_MEMORY_WEB_DATABASE ? ':memory:' : 'susu-boutique.db';
 
 let singletonDb: SQLite.SQLiteDatabase | null = null;
 let initialized = false;
@@ -36,6 +39,10 @@ async function initializeDatabaseUnsafe(db: SQLite.SQLiteDatabase): Promise<void
   }
 
   initializationPromise = (async () => {
+    if (Platform.OS === 'web') {
+      // Avoid extra OPFS files for SQLite temp indexes during schema migrations.
+      await db.execAsync('PRAGMA temp_store = MEMORY;');
+    }
     await runMigrations(db);
     initialized = true;
   })().catch((error) => {

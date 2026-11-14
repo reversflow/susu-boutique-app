@@ -7,23 +7,33 @@ import { getSupabaseConfiguration } from './config';
 
 let client: SupabaseClient | null = null;
 
+function getWebStorage(): Storage | null {
+  try {
+    return globalThis.localStorage ?? null;
+  } catch {
+    return null;
+  }
+}
+
 const authStorage = {
   getItem: async (key: string): Promise<string | null> => {
     if (Platform.OS === 'web') {
-      return typeof localStorage === 'undefined' ? null : localStorage.getItem(key);
+      return getWebStorage()?.getItem(key) ?? null;
     }
     return SecureStore.getItemAsync(key);
   },
   setItem: async (key: string, value: string): Promise<void> => {
     if (Platform.OS === 'web') {
-      localStorage.setItem(key, value);
+      const storage = getWebStorage();
+      if (!storage) throw new Error('El almacenamiento local no está disponible.');
+      storage.setItem(key, value);
       return;
     }
     await SecureStore.setItemAsync(key, value);
   },
   removeItem: async (key: string): Promise<void> => {
     if (Platform.OS === 'web') {
-      localStorage.removeItem(key);
+      getWebStorage()?.removeItem(key);
       return;
     }
     await SecureStore.deleteItemAsync(key);
@@ -46,7 +56,7 @@ export function getSupabaseClient(): SupabaseClient {
         storage: authStorage,
         autoRefreshToken: true,
         persistSession: true,
-        detectSessionInUrl: false,
+        detectSessionInUrl: Platform.OS === 'web',
       },
     });
   }

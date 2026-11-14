@@ -146,6 +146,60 @@ function requirementsForVersion(version: number): TableRequirement[] {
       });
     }
 
+    const storeSalesColumns: ColumnRequirement[] = [
+      { name: 'id', affinity: 'INTEGER', primaryKey: 1, notNull: false },
+      { name: 'sold_at', affinity: 'TEXT', primaryKey: 0, notNull: true },
+      { name: 'total_cents', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+    ];
+    const storeSaleItemColumns: ColumnRequirement[] = [
+      { name: 'id', affinity: 'INTEGER', primaryKey: 1, notNull: false },
+      { name: 'sale_id', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+      { name: 'price_group_id', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+      { name: 'units_sold', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+      { name: 'unit_price_cents', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+      { name: 'total_cents', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+    ];
+    if (version >= 12) {
+      storeSalesColumns.push(
+        { name: 'request_id', affinity: 'TEXT', primaryKey: 0, notNull: false },
+        { name: 'request_payload', affinity: 'TEXT', primaryKey: 0, notNull: false },
+      );
+      storeSaleItemColumns.push({
+        name: 'base_unit_price_cents', affinity: 'INTEGER', primaryKey: 0, notNull: true,
+      });
+    }
+
+    const stockMovementColumns: ColumnRequirement[] = [
+      { name: 'id', affinity: 'INTEGER', primaryKey: 1, notNull: false },
+      { name: 'price_group_id', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+      { name: 'movement_type', affinity: 'TEXT', primaryKey: 0, notNull: true },
+      { name: 'units_delta', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+      { name: 'supplier_id', affinity: 'INTEGER', primaryKey: 0, notNull: false },
+      { name: 'sale_id', affinity: 'INTEGER', primaryKey: 0, notNull: false },
+      { name: 'note', affinity: 'TEXT', primaryKey: 0, notNull: true },
+      { name: 'created_at', affinity: 'TEXT', primaryKey: 0, notNull: true },
+    ];
+    if (version >= 13) {
+      storeSaleItemColumns.push({
+        name: 'cost_total_cents', affinity: 'INTEGER', primaryKey: 0, notNull: false,
+      });
+      stockMovementColumns.push(
+        { name: 'cost_total_cents', affinity: 'INTEGER', primaryKey: 0, notNull: false },
+        { name: 'charged_total_cents', affinity: 'INTEGER', primaryKey: 0, notNull: false },
+      );
+      tables.push({
+        name: 'store_stock_lots',
+        columns: [
+          { name: 'id', affinity: 'INTEGER', primaryKey: 1, notNull: false },
+          { name: 'price_group_id', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+          { name: 'received_units', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+          { name: 'remaining_units', affinity: 'INTEGER', primaryKey: 0, notNull: true },
+          { name: 'unit_cost_cents', affinity: 'INTEGER', primaryKey: 0, notNull: false },
+          { name: 'created_at', affinity: 'TEXT', primaryKey: 0, notNull: true },
+        ],
+      });
+    }
+
     tables.push(
       {
         name: 'store_categories',
@@ -162,35 +216,15 @@ function requirementsForVersion(version: number): TableRequirement[] {
       },
       {
         name: 'store_sales',
-        columns: [
-          { name: 'id', affinity: 'INTEGER', primaryKey: 1, notNull: false },
-          { name: 'sold_at', affinity: 'TEXT', primaryKey: 0, notNull: true },
-          { name: 'total_cents', affinity: 'INTEGER', primaryKey: 0, notNull: true },
-        ],
+        columns: storeSalesColumns,
       },
       {
         name: 'store_sale_items',
-        columns: [
-          { name: 'id', affinity: 'INTEGER', primaryKey: 1, notNull: false },
-          { name: 'sale_id', affinity: 'INTEGER', primaryKey: 0, notNull: true },
-          { name: 'price_group_id', affinity: 'INTEGER', primaryKey: 0, notNull: true },
-          { name: 'units_sold', affinity: 'INTEGER', primaryKey: 0, notNull: true },
-          { name: 'unit_price_cents', affinity: 'INTEGER', primaryKey: 0, notNull: true },
-          { name: 'total_cents', affinity: 'INTEGER', primaryKey: 0, notNull: true },
-        ],
+        columns: storeSaleItemColumns,
       },
       {
         name: 'store_stock_movements',
-        columns: [
-          { name: 'id', affinity: 'INTEGER', primaryKey: 1, notNull: false },
-          { name: 'price_group_id', affinity: 'INTEGER', primaryKey: 0, notNull: true },
-          { name: 'movement_type', affinity: 'TEXT', primaryKey: 0, notNull: true },
-          { name: 'units_delta', affinity: 'INTEGER', primaryKey: 0, notNull: true },
-          { name: 'supplier_id', affinity: 'INTEGER', primaryKey: 0, notNull: false },
-          { name: 'sale_id', affinity: 'INTEGER', primaryKey: 0, notNull: false },
-          { name: 'note', affinity: 'TEXT', primaryKey: 0, notNull: true },
-          { name: 'created_at', affinity: 'TEXT', primaryKey: 0, notNull: true },
-        ],
+        columns: stockMovementColumns,
       },
     );
   }

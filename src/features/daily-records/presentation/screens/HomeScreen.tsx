@@ -4,6 +4,8 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { Screen } from '../../../../ui/components/Screen';
 import { PrimaryButton } from '../../../../ui/components/PrimaryButton';
+import { FadeIn } from '../../../../ui/components/FadeIn';
+import { staggerDelay } from '../../../../ui/motion';
 import { useTheme } from '../../../../core/theme/ThemeProvider';
 import { createFocusRefreshGuard } from '../../../../core/utils/focusRefreshGuard';
 import { formatCurrency } from '../../../../core/utils/currency';
@@ -99,77 +101,85 @@ export function HomeScreen() {
 
   return (
     <Screen topInset bottomInset={false}>
-      <View style={styles.brandHeader}>
-        <View style={styles.brand}>
+      <FadeIn delay={staggerDelay(0)}>
+        <View style={styles.brandHeader}>
+          <View style={styles.brand}>
+            <Text
+              style={[
+                styles.businessName,
+                { color: theme.colors.text, fontFamily: theme.typography.serifFamily },
+              ]}
+            >
+              {businessName}
+            </Text>
+          </View>
+          <Text style={[styles.today, { color: theme.colors.mutedText }]}>{todayLabel}</Text>
+        </View>
+      </FadeIn>
+
+      <FadeIn delay={staggerDelay(1)}>
+        <View style={styles.monthHeading}>
           <Text
             style={[
-              styles.businessName,
+              styles.monthName,
               { color: theme.colors.text, fontFamily: theme.typography.serifFamily },
             ]}
           >
-            {businessName}
+            {`${monthName} ${overviewMonth.getFullYear()}`}
           </Text>
         </View>
-        <Text style={[styles.today, { color: theme.colors.mutedText }]}>{todayLabel}</Text>
-      </View>
+        <Text style={[styles.monthCaption, { color: theme.colors.mutedText }]}>Resumen del mes</Text>
+      </FadeIn>
 
-      <View style={styles.monthHeading}>
-        <Text
+      <FadeIn delay={staggerDelay(2)}>
+        <View
           style={[
-            styles.monthName,
-            { color: theme.colors.text, fontFamily: theme.typography.serifFamily },
+            styles.netCard,
+            { backgroundColor: theme.colors.surface, borderColor: theme.colors.border },
           ]}
         >
-          {`${monthName} ${overviewMonth.getFullYear()}`}
-        </Text>
-      </View>
-      <Text style={[styles.monthCaption, { color: theme.colors.mutedText }]}>Resumen del mes</Text>
+          <Text style={[styles.cardLabel, { color: theme.colors.mutedText }]}>{netProfitLabel}</Text>
+          <Text
+            accessibilityLabel={`${netProfitLabel}, ${formatCurrency(overview.netProfit)}`}
+            style={[
+              styles.netValue,
+              {
+                color:
+                  overview.netProfit < 0
+                    ? theme.colors.danger
+                    : overview.netProfit > 0
+                      ? theme.colors.success
+                      : theme.colors.text,
+              },
+            ]}
+          >
+            {`${overview.netProfit < 0 ? '−' : overview.netProfit > 0 ? '+' : ''}${formatCurrency(Math.abs(overview.netProfit))}`}
+          </Text>
+        </View>
+      </FadeIn>
 
-      <View
-        style={[
-          styles.netCard,
-          { backgroundColor: theme.colors.surface, borderColor: theme.colors.border },
-        ]}
-      >
-        <Text style={[styles.cardLabel, { color: theme.colors.mutedText }]}>{netProfitLabel}</Text>
-        <Text
-          accessibilityLabel={`${netProfitLabel}, ${formatCurrency(overview.netProfit)}`}
-          style={[
-            styles.netValue,
-            {
-              color:
-                overview.netProfit < 0
-                  ? theme.colors.danger
-                  : overview.netProfit > 0
-                    ? theme.colors.success
-                    : theme.colors.text,
-            },
-          ]}
-        >
-          {`${overview.netProfit < 0 ? '−' : overview.netProfit > 0 ? '+' : ''}${formatCurrency(Math.abs(overview.netProfit))}`}
-        </Text>
-      </View>
+      <FadeIn delay={staggerDelay(3)}>
+        <View style={styles.metricGrid}>
+          <KpiCard label="Ventas" value={formatCurrency(overview.totalSold)} valueColor={theme.colors.sales} />
+          <KpiCard
+            label="Beneficio bruto"
+            value={formatCurrency(overview.grossProfit)}
+            valueColor={overview.grossProfit < 0 ? theme.colors.danger : overview.grossProfit > 0 ? theme.colors.success : theme.colors.text}
+          />
+          <KpiCard
+            label="Gastos"
+            value={formatCurrency(overview.totalAdditionalExpenses)}
+            valueColor={theme.colors.danger}
+          />
+          <KpiCard
+            label="Inversión asignada"
+            value={formatCurrency(overview.totalInvested)}
+            valueColor={theme.colors.investment}
+          />
+        </View>
+      </FadeIn>
 
-      <View style={styles.metricGrid}>
-        <KpiCard label="Ventas" value={formatCurrency(overview.totalSold)} valueColor={theme.colors.sales} />
-        <KpiCard
-          label="Beneficio bruto"
-          value={formatCurrency(overview.grossProfit)}
-          valueColor={overview.grossProfit < 0 ? theme.colors.danger : overview.grossProfit > 0 ? theme.colors.success : theme.colors.text}
-        />
-        <KpiCard
-          label="Gastos"
-          value={formatCurrency(overview.totalAdditionalExpenses)}
-          valueColor={theme.colors.danger}
-        />
-        <KpiCard
-          label="Inversión asignada"
-          value={formatCurrency(overview.totalInvested)}
-          valueColor={theme.colors.investment}
-        />
-      </View>
-
-      <View style={styles.availableSection}>
+      <FadeIn delay={staggerDelay(4)} style={styles.availableSection}>
         <View style={[styles.availableCard, { backgroundColor: theme.colors.surface, borderColor: theme.colors.investment }]}>
           <Pressable
             accessibilityRole="button"
@@ -196,21 +206,27 @@ export function HomeScreen() {
             <Text style={[styles.investmentActionLabel, { color: theme.colors.onPrimary }]}>Agregar inversión hoy</Text>
           </Pressable>
         </View>
-      </View>
+      </FadeIn>
 
       {overview.trackedDays === 0 ? (
         <Text style={[styles.emptyHint, { color: theme.colors.mutedText }]}>Todavía no hay registros este mes.</Text>
       ) : null}
 
-      <LastDaySummaryCard loading={lastDaySummary.loading} error={lastDaySummary.error} result={lastDaySummary.result} />
+      <FadeIn delay={staggerDelay(5)}>
+        <LastDaySummaryCard loading={lastDaySummary.loading} error={lastDaySummary.error} result={lastDaySummary.result} />
+      </FadeIn>
 
-      <PrimaryButton
-        title="Registrar el día de hoy"
-        accessibilityLabel={`Registrar el día de hoy, ${todayLabel}`}
-        onPress={registerDayToday}
-      />
+      <FadeIn delay={staggerDelay(6)}>
+        <PrimaryButton
+          title="Registrar el día de hoy"
+          accessibilityLabel={`Registrar el día de hoy, ${todayLabel}`}
+          onPress={registerDayToday}
+        />
+      </FadeIn>
 
-      <UpcomingHolidaysCard />
+      <FadeIn delay={staggerDelay(7)}>
+        <UpcomingHolidaysCard />
+      </FadeIn>
 
     </Screen>
   );
@@ -229,15 +245,15 @@ const styles = StyleSheet.create({
     minWidth: 0,
   },
   businessName: {
-    fontSize: 20,
+    fontSize: 22,
   },
   supportingText: {
-    fontSize: 12,
-    lineHeight: 18,
+    fontSize: 13,
+    lineHeight: 19,
   },
   today: {
     maxWidth: '48%',
-    fontSize: 12,
+    fontSize: 13,
     textAlign: 'right',
   },
   monthHeading: {
@@ -245,15 +261,15 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
   },
   monthName: {
-    fontSize: 30,
-    lineHeight: 38,
+    fontSize: 32,
+    lineHeight: 41,
     textTransform: 'capitalize',
     flexShrink: 1,
   },
   monthCaption: {
     marginTop: -4,
-    fontSize: 12,
-    lineHeight: 18,
+    fontSize: 13,
+    lineHeight: 19,
   },
   netCard: {
     minWidth: 0,
@@ -263,12 +279,12 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   cardLabel: {
-    fontSize: 12,
-    lineHeight: 17,
+    fontSize: 13,
+    lineHeight: 18,
   },
   netValue: {
-    fontSize: 32,
-    lineHeight: 40,
+    fontSize: 34,
+    lineHeight: 43,
     fontWeight: '700',
     fontVariant: ['tabular-nums'],
     flexShrink: 1,
@@ -292,19 +308,19 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   availableLabel: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 15,
+    lineHeight: 22,
   },
   availableValue: {
-    fontSize: 34,
-    lineHeight: 42,
+    fontSize: 36,
+    lineHeight: 45,
     fontWeight: '700',
     fontVariant: ['tabular-nums'],
     flexShrink: 1,
   },
   availableLink: {
-    fontSize: 13,
-    lineHeight: 19,
+    fontSize: 14,
+    lineHeight: 21,
     fontWeight: '600',
   },
   investmentAction: {
@@ -314,13 +330,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   investmentActionLabel: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '700',
     textAlign: 'center',
   },
   emptyHint: {
     paddingVertical: 8,
-    fontSize: 13,
+    fontSize: 14,
   },
   center: {
     minHeight: 220,
@@ -329,7 +345,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   error: {
-    fontSize: 14,
+    fontSize: 15,
     textAlign: 'center',
   },
   pressed: {

@@ -41,7 +41,7 @@ export function LastDaySummaryCard({ loading, error, result }: Props) {
               value={formatCurrency(result.profit.netProfit)}
               valueColor={result.profit.netProfit < 0 ? theme.colors.danger : result.profit.netProfit > 0 ? theme.colors.success : theme.colors.text}
             />
-            <LedgerRow label="Ventas datafono" value={formatCurrency(record.dataphoneSales ?? 0)} valueColor={theme.colors.sales} />
+            <LedgerRow label="Ventas con tarjeta" value={formatCurrency(record.dataphoneSales ?? 0)} valueColor={theme.colors.sales} />
           </View>
         </>
       )}
@@ -57,13 +57,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   title: {
-    fontSize: 20,
-    lineHeight: 28,
+    fontSize: 22,
+    lineHeight: 30,
   },
   date: {
     marginTop: 2,
     marginBottom: 4,
-    fontSize: 13,
+    fontSize: 14,
     textTransform: 'capitalize',
   },
   rows: {
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
   },
   state: {
     paddingVertical: 10,
-    fontSize: 14,
+    fontSize: 15,
   },
 });

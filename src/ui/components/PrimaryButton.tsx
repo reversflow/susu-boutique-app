@@ -1,5 +1,7 @@
-import { ActivityIndicator, Pressable, StyleSheet, Text } from 'react-native';
+import { useCallback, useRef } from 'react';
+import { ActivityIndicator, Animated, Pressable, StyleSheet, Text } from 'react-native';
 import { useTheme } from '../../core/theme/ThemeProvider';
+import { motion } from '../motion';
 
 interface PrimaryButtonProps {
   title: string;
@@ -18,31 +20,51 @@ export function PrimaryButton({
 }: PrimaryButtonProps) {
   const { theme } = useTheme();
   const isDisabled = disabled || busy;
+  const scale = useRef(new Animated.Value(1)).current;
+
+  const animateScale = useCallback(
+    (toValue: number) => {
+      Animated.spring(scale, {
+        toValue,
+        speed: 40,
+        bounciness: 5,
+        useNativeDriver: motion.useNativeDriver,
+      }).start();
+    },
+    [scale],
+  );
 
   return (
-    <Pressable
-      accessibilityRole="button"
-      accessibilityLabel={accessibilityLabel ?? title}
-      accessibilityState={{ disabled: isDisabled, busy }}
-      disabled={isDisabled}
-      onPress={onPress}
-      style={({ pressed }) => [
-        styles.button,
-        {
-          backgroundColor: theme.colors.primary,
-          borderRadius: theme.radius.sm,
-        },
-        pressed ? styles.pressed : null,
-        isDisabled ? styles.disabled : null,
-      ]}
-    >
-      {busy ? <ActivityIndicator color={theme.colors.onPrimary} /> : null}
-      <Text style={[styles.label, { color: theme.colors.onPrimary }]}>{title}</Text>
-    </Pressable>
+    <Animated.View style={[styles.wrapper, { transform: [{ scale }] }]}>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel ?? title}
+        accessibilityState={{ disabled: isDisabled, busy }}
+        disabled={isDisabled}
+        onPress={onPress}
+        onPressIn={() => animateScale(motion.pressedScale)}
+        onPressOut={() => animateScale(1)}
+        style={({ pressed }) => [
+          styles.button,
+          {
+            backgroundColor: theme.colors.primary,
+            borderRadius: theme.radius.sm,
+          },
+          pressed ? styles.pressed : null,
+          isDisabled ? styles.disabled : null,
+        ]}
+      >
+        {busy ? <ActivityIndicator color={theme.colors.onPrimary} /> : null}
+        <Text style={[styles.label, { color: theme.colors.onPrimary }]}>{title}</Text>
+      </Pressable>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    alignSelf: 'stretch',
+  },
   button: {
     minHeight: 48,
     paddingHorizontal: 16,
@@ -54,7 +76,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   label: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
     flexShrink: 1,

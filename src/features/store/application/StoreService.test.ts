@@ -6,6 +6,7 @@ function createRepository(): StoreRepository {
   return {
     listCategories: vi.fn(async () => []),
     listStockItems: vi.fn(async () => []),
+    getDashboardSummary: vi.fn(async () => ({ unitsSold: 0, revenueCents: 0, soldCostCents: 0 })),
     createCategory: vi.fn(async (input) => ({ id: 1, name: input.name, sortOrder: 0 })),
     listPriceGroups: vi.fn(async () => []),
     createPriceGroup: vi.fn(async (input) => ({

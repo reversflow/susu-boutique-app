@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   label: {
     flex: 1,
     minWidth: 0,
-    fontSize: 15,
+    fontSize: 16,
     flexShrink: 1,
   },
   trailing: {
@@ -89,18 +89,18 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   value: {
-    fontSize: 15,
+    fontSize: 16,
     textAlign: 'right',
     flexShrink: 1,
   },
   hint: {
-    fontSize: 12,
+    fontSize: 13,
     textAlign: 'right',
     flexShrink: 1,
   },
   chevron: {
-    fontSize: 20,
-    lineHeight: 22,
+    fontSize: 22,
+    lineHeight: 24,
   },
   pressed: {
     opacity: 0.68,

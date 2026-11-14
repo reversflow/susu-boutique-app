@@ -90,11 +90,11 @@ export function MonthSummaryCard({
           valueColor={overview.netProfit < 0 ? theme.colors.danger : overview.netProfit > 0 ? theme.colors.success : theme.colors.text}
         />
         <LedgerRow
-          label="Ventas datafono"
+          label="Ventas con tarjeta"
           value={formatCurrency(overview.totalDataphoneSales)}
           valueColor={theme.colors.sales}
           onPress={onPressDataphone}
-          accessibilityLabel={`Ventas datafono de ${monthName}, ${formatCurrency(overview.totalDataphoneSales)}`}
+          accessibilityLabel={`Ventas con tarjeta de ${monthName}, ${formatCurrency(overview.totalDataphoneSales)}`}
         />
       </View>
     </View>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   monthName: {
-    fontSize: 20,
+    fontSize: 22,
     textTransform: 'capitalize',
   },
   headerMonthButton: {
@@ -129,10 +129,10 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   monthChevron: {
-    fontSize: 20,
+    fontSize: 22,
   },
   badge: {
-    fontSize: 12,
+    fontSize: 13,
   },
   pressed: {
     opacity: 0.65,

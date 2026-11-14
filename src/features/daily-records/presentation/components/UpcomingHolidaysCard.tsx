@@ -77,26 +77,26 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   title: {
-    fontSize: 21,
-    lineHeight: 28,
+    fontSize: 23,
+    lineHeight: 30,
   },
   holidayName: {
-    fontSize: 19,
-    lineHeight: 25,
+    fontSize: 21,
+    lineHeight: 27,
     fontWeight: '700',
   },
   holidayDate: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 15,
+    lineHeight: 22,
     textTransform: 'capitalize',
   },
   stateText: {
     flex: 1,
-    fontSize: 13,
+    fontSize: 14,
   },
   warning: {
     flex: 1,
-    fontSize: 12,
+    fontSize: 13,
   },
   stateRow: {
     flexDirection: 'row',
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   link: {
     minHeight: 40,
     textAlignVertical: 'center',
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '600',
   },
   linkPressed: {

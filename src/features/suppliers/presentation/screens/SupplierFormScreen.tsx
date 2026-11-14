@@ -133,25 +133,25 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   muted: {
-    fontSize: 14,
+    fontSize: 15,
   },
   field: {
     gap: 6,
   },
   fieldLabel: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
   },
   input: {
     borderWidth: 1,
     paddingVertical: 10,
-    fontSize: 16,
+    fontSize: 17,
   },
   inputMultiline: {
     minHeight: 86,
     textAlignVertical: 'top',
   },
   error: {
-    fontSize: 13,
+    fontSize: 14,
   },
 });

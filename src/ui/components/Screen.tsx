@@ -1,17 +1,17 @@
-import { PropsWithChildren, useContext } from 'react';
+import { PropsWithChildren, useContext, useEffect, useRef } from 'react';
 import {
+  Animated,
   KeyboardAvoidingView,
   PixelRatio,
   Platform,
-  ScrollView,
   StyleSheet,
   useWindowDimensions,
-  View,
   ViewStyle,
 } from 'react-native';
 import { Edge, SafeAreaView } from 'react-native-safe-area-context';
 import { HeaderHeightContext } from '@react-navigation/elements';
 import { useTheme } from '../../core/theme/ThemeProvider';
+import { motion, useReducedMotion } from '../motion';
 
 type ScreenProps = PropsWithChildren<{
   scroll?: boolean;
@@ -19,6 +19,8 @@ type ScreenProps = PropsWithChildren<{
   topInset?: boolean;
   bottomInset?: boolean;
   keyboardAware?: boolean;
+  /** Fade the screen in when it mounts. Disable for nested or instant screens. */
+  animated?: boolean;
 }>;
 
 export function Screen({
@@ -28,8 +30,41 @@ export function Screen({
   topInset = false,
   bottomInset = true,
   keyboardAware = false,
+  animated = true,
 }: ScreenProps) {
   const { theme } = useTheme();
+  const reducedMotion = useReducedMotion();
+  const entrance = useRef(new Animated.Value(animated ? 0 : 1)).current;
+
+  useEffect(() => {
+    if (!animated || reducedMotion) {
+      entrance.setValue(1);
+      return;
+    }
+
+    const animation = Animated.timing(entrance, {
+      toValue: 1,
+      duration: motion.duration.base,
+      easing: motion.easing,
+      useNativeDriver: motion.useNativeDriver,
+    });
+
+    animation.start();
+
+    return () => animation.stop();
+  }, [animated, entrance, reducedMotion]);
+
+  const entranceStyle = {
+    opacity: entrance,
+    transform: [
+      {
+        translateY: entrance.interpolate({
+          inputRange: [0, 1],
+          outputRange: [motion.rise, 0],
+        }),
+      },
+    ],
+  };
   const headerHeight = useContext(HeaderHeightContext) ?? 0;
   // Native-stack reports the Android header origin in px; KeyboardAvoidingView expects dp.
   const keyboardVerticalOffset =
@@ -66,13 +101,14 @@ export function Screen({
           behavior={keyboardAware ? (Platform.OS === 'ios' ? 'padding' : 'height') : undefined}
           keyboardVerticalOffset={keyboardVerticalOffset}
         >
-          <ScrollView
+          <Animated.ScrollView
+            style={[styles.fill, entranceStyle]}
             contentContainerStyle={contentStyle}
             keyboardShouldPersistTaps="handled"
             keyboardDismissMode={keyboardAware ? 'none' : 'on-drag'}
           >
             {children}
-          </ScrollView>
+          </Animated.ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
     );
@@ -88,7 +124,7 @@ export function Screen({
         behavior={keyboardAware ? (Platform.OS === 'ios' ? 'padding' : 'height') : undefined}
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
-        <View style={contentStyle}>{children}</View>
+        <Animated.View style={[contentStyle, entranceStyle]}>{children}</Animated.View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

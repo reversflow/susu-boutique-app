@@ -75,11 +75,11 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.97 }],
   },
   emoji: {
-    fontSize: 22,
+    fontSize: 24,
   },
   label: {
     color: '#FFFFFF',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '700',
     textAlign: 'center',
   },

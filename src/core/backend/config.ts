@@ -1,5 +1,3 @@
-export const SUSU_BOUTIQUE_BUSINESS_ID = '7fca8de7-9e57-4a19-8873-5d7432e890a6';
-
 export interface SupabaseConfiguration {
   url: string;
   publishableKey: string;
